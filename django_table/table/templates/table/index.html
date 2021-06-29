@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welbex table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
+</head>
+<body>
+    <table id="table" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Название</th>
+                <th>Количество</th>
+                <th>Расстояние</th>
+            </tr>
+        </thead>
+
+        {% for item in page_obj %}
+        <tbody>
+            <tr> 
+                <td>{{ item.date }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.distance }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <nav>
+        <ul>
+            {% for p in page_obj.paginator.page_range %}
+            {% if page_obj.number == p %}
+            <li>{{ p }}</li>
+            {% else %}
+            <li>
+                <a href="?page={{ p }}">{{ p }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+</body>
+</html>
